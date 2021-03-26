@@ -1,20 +1,26 @@
 pipeline {
     agent any
-
+ parameters {
+    password (name: 'tenancy_ocid')
+    password (name: 'user_ocid')
+    password (name: 'fingerprint')
+    
+  }
     stages {
         stage('Init') {
             steps {
                 echo 'Building..'
+                sh "terraform init -input=false"
             }
         }
         stage('Plan') {
             steps {
-                echo 'Testing..'
+               sh "terraform plan"
             }
         }
         stage('Apply') {
             steps {
-                echo 'Deploying....'
+                  sh "terraform apply--auto-approve"
             }
         }
     }
