@@ -1,7 +1,6 @@
 pipeline {
  parameters {
-        string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
-        
+        string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment') 
   
     }
     
@@ -17,9 +16,8 @@ environment {
         stage('Init') {
             steps {
                 echo 'Initializing..'
-                sh 'pwd;cd terraform/Terraform-VCN ; terraform init -input=false'
-                sh 'pwd;cd terraform/Terraform-VCN ; terraform workspace new ${environment}'
-                sh 'pwd;cd terraform/Terraform-VCN ; terraform workspace select ${environment}'
+                sh 'terraform init -input=false'
+                sh 'terraform workspace select ${environment}'
             }
         }
         stage('Plan') {
