@@ -7,7 +7,7 @@ environment {
         private_key      = credentials('PRIVATE_KEY')
     }
     
-  }
+  
     stages {
         stage('Init') {
             steps {
