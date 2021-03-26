@@ -1,22 +1,10 @@
-# Source from https://registry.terraform.io/modules/oracle-terraform-modules/vcn/oci/
-
-module "vcn" {
-  source  = "oracle-terraform-modules/vcn/oci"
-  version = "2.0.0"
-  # insert the 4 required variables here
-  compartment_id=var.compartment_id
-  vcn_name="TerraformVCN"
-  vcn_dns_label="VCNPradyDNS"
-  vcn_cidr="10.0.0.0/16"
-  region=var.region
-  internet_gateway_enabled = true
-  nat_gateway_enabled = true
-  service_gateway_enabled = true
+variable "compartment_id" {
+  default = "ocid1.compartment.oc1..aaaaaaaaldrjz3hdkuetjpg773h7chicnahfhlwcfluoeigw3w6lurqlyt5q"
 }
-data "oci_identity_availability_domain" "test_compartment" {
-    #Required
-    compartment_id = var.tenancy_ocid
-  ad_number="1"
+resource "oci_core_vcn" "test_vcn" {
+compartment_id = var.compartment_id
+display_name = "PradyTFJenkins"
+cidr_block = "10.0.0.0/16"
+dns_label = "pradyDNS"
 }
-
 
