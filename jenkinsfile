@@ -2,7 +2,7 @@ pipeline {
     agent any
  parameters {
    withCredentials([file(credentialsId: 'terraformtrvars', variable: 'tfvars')]) {
-    
+      sh 'use $tfvars'
 }
     
   }
