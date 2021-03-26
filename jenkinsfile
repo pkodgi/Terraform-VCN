@@ -1,9 +1,9 @@
 pipeline {
     agent any
  parameters {
-    password (name: 'tenancy_ocid')
-    password (name: 'user_ocid')
-    password (name: 'fingerprint')
+   withCredentials([file(credentialsId: 'terraformtrvars', variable: 'tfvars')]) {
+    
+}
     
   }
     stages {
