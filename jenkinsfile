@@ -1,9 +1,10 @@
 pipeline {
     agent any
- environment {
-   withCredentials([file(credentialsId: 'terraformtrvars', variable: 'tfvars')]) {
-      sh 'use $tfvars'
-}
+environment {
+        tenancy_ocid     = credentials('TENANCY_OCID')
+        user_ocid        = credentials('USER_OCID')
+        fingerprint      = credentials('FINGERPRINT')
+    }
     
   }
     stages {
