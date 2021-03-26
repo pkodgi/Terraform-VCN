@@ -1,6 +1,6 @@
 pipeline {
     agent any
- parameters {
+ environment {
    withCredentials([file(credentialsId: 'terraformtrvars', variable: 'tfvars')]) {
       sh 'use $tfvars'
 }
