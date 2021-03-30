@@ -16,6 +16,8 @@ environment {
         stage('Init') {
             steps {
                 echo 'Initializing..'
+                def tfHome = tool name: ‘Terraform’
+                env.PATH = “${tfHome}:${env.PATH}”
                 sh 'terraform init -input=false'
                 sh 'terraform workspace select ${environment}'
             }
