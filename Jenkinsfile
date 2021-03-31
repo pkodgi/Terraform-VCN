@@ -6,9 +6,9 @@ environment {
         fingerprint      = credentials('FINGERPRINT')
         private_key      = credentials('PRIVATE_KEY')
         PATH = "${PATH}:${getTerraformPath()}
-    }
+}
      stages {
-    stage('Backend-Init') {
+    stage('Init') {
     steps {
                 sh "terraform init"
         }
