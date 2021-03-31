@@ -1,31 +1,31 @@
-pipeline{
-  agent any
-  environment {
-  PATH = "${PATH}:${getTerraformPath()}"
-}
-  stages{
-    stage('S3 - create bucket'){
-      steps{
-        sh "ansible-playbook s3-bucket.yml"
-      }
+pipeline {
+agent any
+environment {
+        tenancy_ocid     = credentials('TENANCY_OCID')
+        user_ocid        = credentials('USER_OCID')
+        fingerprint      = credentials('FINGERPRINT')
+        private_key      = credentials('PRIVATE_KEY')
+        PATH = "${PATH}:${getTerraformPath()}
     }
-    stage('terraform init and apply - dev'){
-      steps{
-        sh returnStatus: true, script: 'terraform workspace new dev'
-        sh "terraform init"
-        sh "ansible-playbook terraform.yml"
-      }
+     stages {
+    stage('Backend-Init') {
+    steps {
+                sh "terraform init"
+        }
     }
-    stage('terraform init and apply - prod'){
-      steps{
-        sh returnStatus: true, script: 'terraform workspace new prod'
-        sh "terraform init"
-        sh "ansible-playbook terraform.yml -e app_env=prod"
-      }
-    }
+        stage('Plan') {
+            steps {
+               sh "terraform plan"
+            }
+        }
+        stage('Apply') {
+            steps {
+                  sh "terraform apply--auto-approve"
+            }
+        }
+	}
   }
-}
-def getTerraformPath(){
+  def getTerraformPath(){
   def tfHome = tool name: 'Terraform'
   return tfHome
 }
