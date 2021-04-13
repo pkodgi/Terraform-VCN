@@ -5,7 +5,7 @@ environment {
         user_ocid        = credentials('USER_OCID')
         fingerprint      = credentials('FINGERPRINT')
         private_key      = credentials('PRIVATE_KEY')
-        PATH = "${PATH}:${getTerraformPath()}
+        /*PATH = "${PATH}:${getTerraformPath()}*/
 }
      stages {
     stage('Init') {
