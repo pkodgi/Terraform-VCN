@@ -12,7 +12,7 @@ environment {
     stage('Init') {
     steps {
 	    sh "${tfHome}/terraform init"
-	    echo '$tenancy_ocid'
+	    echo '${tenancy_ocid}'
 	
         }
     }
