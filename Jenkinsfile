@@ -16,12 +16,12 @@ environment {
     }
         stage('Plan') {
             steps {
-               sh "terraform plan"
+               sh "${tfHome}/terraform plan"
             }
         }
         stage('Apply') {
             steps {
-                  sh "terraform apply--auto-approve"
+                  sh "${tfHome}/terraform apply--auto-approve"
             }
         }
 	}
