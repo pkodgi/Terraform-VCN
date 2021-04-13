@@ -5,7 +5,8 @@ environment {
         user_ocid        = credentials('USER_OCID')
         fingerprint      = credentials('FINGERPRINT')
         private_key      = credentials('PRIVATE_KEY')
-	PATH = "${getTerraformPath()}:$PATH
+	def tfHome = tool name: 'Terraform' type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
+	PATH = "$tfHome:$PATH
 }
      stages {
     stage('Init') {
@@ -25,7 +26,3 @@ environment {
         }
 	}
   }
-  def getTerraformPath(){
-  def tfHome = tool name: 'Terraform' type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
-  return tfHome
-}
