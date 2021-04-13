@@ -12,6 +12,8 @@ environment {
     stage('Init') {
     steps {
 	    sh "${tfHome}/terraform init"
+	    echo '$tenancy_ocid'
+	
         }
     }
         stage('Plan') {
