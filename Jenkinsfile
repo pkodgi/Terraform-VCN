@@ -6,12 +6,12 @@ environment {
         fingerprint      = credentials('FINGERPRINT')
         private_key      = credentials('PRIVATE_KEY')
 	def tfHome = tool name: 'Terraform'
-	PATH = "$tfHome:$PATH
+	
 }
      stages {
     stage('Init') {
     steps {
-                sh "terraform init"
+	    sh "${tfHome}/terraform init"
         }
     }
         stage('Plan') {
