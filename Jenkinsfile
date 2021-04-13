@@ -26,6 +26,6 @@ environment {
 	}
   }
   def getTerraformPath(){
-  def tfHome = tool name: 'Terraform'
+  def tfHome = tool name: 'Terraform' type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
   return tfHome
 }
