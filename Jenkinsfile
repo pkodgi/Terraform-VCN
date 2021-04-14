@@ -9,6 +9,17 @@ environment {
 	
 }
      stages {
+	   stage('PreInit') {
+		   steps { 
+		   withCredentials([file(credentialsId: 'terraformtrvars', variable: 'MYTFVARS')]) {
+   sh '''
+         cat $MYTFVARS  
+    '''
+}
+		   }
+			   
+	      }
+	     
     stage('Init') {
     steps {
 	    sh "${tfHome}/terraform init"
