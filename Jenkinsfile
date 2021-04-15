@@ -39,7 +39,7 @@ environment {
         }
         stage('Apply') {
             steps {
-                  sh "${tfHome}/terraform apply--auto-approve"
+                  sh "${tfHome}/terraform apply -auto-approve"
             }
         }
 	}
