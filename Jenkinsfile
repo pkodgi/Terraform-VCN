@@ -11,14 +11,14 @@ environment {
 		   withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]) {
    sh '''
 	 cp $MYTFVARS /var/jenkins_home/workspace/TFProject
-	 ls -la /var/jenkins_home/workspace/TFProject
+	
     '''
 }
 			   
  withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
     sh '''
 	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject
-	 ls -la /var/jenkins_home/workspace/TFProject
+	 
     '''
 }
 		   }
@@ -28,7 +28,7 @@ environment {
     stage('Init') {
     steps {
 	    sh "${tfHome}/terraform init"
-	    echo '${tenancy_ocid}'
+	   
 	
         }
     }
