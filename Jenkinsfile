@@ -13,14 +13,14 @@ environment {
 		   steps { 
 		   withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]) {
    sh '''
-	 
+	 cp-rf $MYTFVARS /var/jenkins_home/workspace/TFProject
 	 ls -la /var/jenkins_home/workspace/TFProject
     '''
 }
 			   
  withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
     sh '''
-	 
+	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject
 	 ls -la /var/jenkins_home/workspace/TFProject
     '''
 }
