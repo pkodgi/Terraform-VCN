@@ -13,7 +13,9 @@ environment {
 		   steps { 
 		   withCredentials([file(credentialsId: 'terraformtrvars', variable: 'MYTFVARS')]) {
    sh '''
-         cat $MYTFVARS  
+         cat $MYTFVARS 
+	 cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	 ls -la /var/jenkins_home/workspace/TFProject
     '''
 }
 		   }
