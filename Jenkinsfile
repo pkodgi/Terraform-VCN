@@ -11,10 +11,17 @@ environment {
      stages {
 	   stage('PreInit') {
 		   steps { 
-		   withCredentials([file(credentialsId: 'terraformtrvars', variable: 'MYTFVARS')]) {
+		   withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]) {
    sh '''
-         cat $MYTFVARS 
+      
 	 cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	 ls -la /var/jenkins_home/workspace/TFProject
+    '''
+}
+			   
+ withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
+    sh '''
+	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject
 	 ls -la /var/jenkins_home/workspace/TFProject
     '''
 }
