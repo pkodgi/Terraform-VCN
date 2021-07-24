@@ -8,17 +8,20 @@ environment {
 }
      stages {
 	   stage('PreInit') {
-		      sh '''
+		     
    
    when { expression { terraformVars == 'true' } }
             steps {
-               rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+               
 	       withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')])
-	       cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	    sh '''
+	    	   rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	       '''
             }
 	
 	
-    '''
+    
 }
 			   
  withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
