@@ -12,10 +12,10 @@ environment {
    
    when { expression { terraformVars == 'true' } }
             steps {
-               
+               rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
 		    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
 	    sh '''
-	    	   rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+	    	   
 	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
 	       '''
 		    
