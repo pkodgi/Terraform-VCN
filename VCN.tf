@@ -3,7 +3,7 @@ variable "compartment_id" {
 }
 resource "oci_core_vcn" "test_vcn" {
 compartment_id = var.compartment_id
-display_name = "PradyTFJenkins"
+display_name = "PradyTFJenkinsLearn"
 cidr_block = "10.0.0.0/16"
 dns_label = "pradyDNS"
 }
