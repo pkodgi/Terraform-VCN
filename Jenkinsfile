@@ -13,26 +13,26 @@ environment {
    when { expression { terraformVars == 'true' } }
             steps {
                
-	       withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')])
+		    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
 	    sh '''
 	    	   rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
 	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
 	       '''
+		    
+		    }	    withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
+    sh '''
+	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject
+	 
+    '''
             }
 	
 	
     
 }
 			   
- withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
-    sh '''
-	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject
-	 
-    '''
-}
-		   }
-			   
-	      }
+	   }
+
+		   
 	     
     stage('Init') {
     steps {
