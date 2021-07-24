@@ -3,6 +3,7 @@ agent any
 environment {
       
 	def tfHome = tool name: 'Terraform'
+	def terraformVars = fileExists '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
 	
 }
      stages {
@@ -10,7 +11,13 @@ environment {
 		   steps { 
 		   withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]) {
    sh '''
-	 cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+   
+   when { expression { terraformVars == 'true' } }
+            steps {
+               rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+	       cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+            }
+	
 	
     '''
 }
