@@ -17,7 +17,7 @@ environment {
 		   }
 		   stage('File Does Not Exist') {
 			  when { expression { terraformVars == 'False' } }   
-			   Steps {
+			   steps {
 				   
 		    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
 	    sh '''
