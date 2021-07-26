@@ -12,7 +12,18 @@ environment {
             steps {
 		   sh '''
 		   rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+		   rm '/var/jenkins_home/workspace/TFProject/terraform.pem'
 		   '''
+		    			    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
+	    sh '''
+	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	       '''
+
+}    
+		       withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
+    sh '''
+	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject 
+    '''
 		   }
 		   }
 		   stage('File Does Not Exist') {
