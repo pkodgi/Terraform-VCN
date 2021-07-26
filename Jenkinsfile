@@ -7,12 +7,18 @@ environment {
 	
 }
      stages {
-	   stage('PreInit') {
-		     
-   
+	   stage('File Exist') {
    when { expression { terraformVars == 'true' } }
             steps {
-		    
+		   sh '''
+		   rm '/var/jenkins_home/workspace/TFProject/terraform.tfvars'
+		   '''
+		   }
+		   }
+		   stage('File Does Not Exist') {
+			  when { expression { terraformVars == 'False' } }   
+			   Steps {
+				   
 		    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
 	    sh '''
 	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
