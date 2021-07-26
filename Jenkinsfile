@@ -18,8 +18,12 @@ environment {
 		   stage('File Does Not Exist') {
 			  when { expression { terraformVars == 'False' } }   
 			   steps {
-		
-		    
+				    withCredentials([file(credentialsId: 'TERRAFORMTFVARS', variable: 'MYTFVARS')]){
+	    sh '''
+	           cp $MYTFVARS /var/jenkins_home/workspace/TFProject
+	       '''
+
+}    
 		       withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
     sh '''
 	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject 
