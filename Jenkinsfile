@@ -26,6 +26,7 @@ environment {
     '''
 		   }
 		   }
+	   }
 		   stage('File Does Not Exist') {
 			  when { expression { terraformVars == 'false' } }   
 			   steps {
