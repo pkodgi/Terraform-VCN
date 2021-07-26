@@ -20,14 +20,11 @@ environment {
 			   steps {
 		
 		    
-		    }	    withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
+		       withCredentials([file(credentialsId: 'PRIVATEKEYFILE', variable: 'SECRETKEY')]) {
     sh '''
 	 cp $SECRETKEY /var/jenkins_home/workspace/TFProject 
     '''
             }
-	
-	
-    
 }
 			   
 	   }
